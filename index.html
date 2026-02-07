@@ -3,9 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <title>...</title>
+  <style>
+    body {
+      background: black;
+      color: #00ffcc;
+      font-family: monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    #chat {
+      width: 400px;
+    }
+
+    #log {
+      height: 300px;
+      border: 1px solid #00ffcc;
+      padding: 10px;
+      overflow-y: auto;
+      margin-bottom: 10px;
+    }
+
+    input {
+      width: 100%;
+      background: black;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      padding: 8px;
+      font-family: monospace;
+    }
+  </style>
 </head>
-<body style="background:black; color:#00ffcc; font-family:monospace;">
-  <p>연결됨.</p>
-  <p>말을 입력해보세요.</p>
-</body>
-</html>
+<body>
+
+  <div id="chat">
+    <div id="log"></div>
+    <input id="input" placeholder="입력하세요" autocomplete="off">
+  </div>
+
+  <script>
+    const log = document.getElementById("log");
+    const input = document.getElementById("input");
+
+    function addMessage(text) {
+      const p = document.createElement("p");
+      p.textContent = text;
+      log.appendChild(p);
+      log.scrollTop = log.scrollHeight;
+    }
+
+    addMessage("연결됨.");
+
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        const text = input.value.
