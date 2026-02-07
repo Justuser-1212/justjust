@@ -55,37 +55,49 @@
   </div>
 
   <script>
-    /* ===== JS가 로드됐는지 확인용 ===== */
-    console.log("JS LOADED"); // 콘솔에 이게 뜨면 JS 정상 실행
+  console.log("JS LOADED"); // JS 로드 확인용
 
-    /* ===== HTML 요소 가져오기 ===== */
-    const log = document.getElementById("log");     // 채팅 기록 영역
-    const input = document.getElementById("input"); // 입력창
+  const log = document.getElementById("log");     // 채팅 기록 영역
+  const input = document.getElementById("input"); // 입력창
 
-    /* ===== 메시지를 화면에 추가하는 함수 ===== */
-    function addMessage(text) {
-      const p = document.createElement("p"); // <p> 태그 생성
-      p.textContent = text;                  // 텍스트 넣기
-      log.appendChild(p);                    // log에 추가
-      log.scrollTop = log.scrollHeight;      // 항상 아래로 스크롤
-    }
+  function addMessage(text) {
+    const p = document.createElement("p"); // 메시지 한 줄 생성
+    p.textContent = text;
+    log.appendChild(p);
+    log.scrollTop = log.scrollHeight; // 항상 최신 메시지 보이게
+  }
 
-    /* ===== 페이지 열리자마자 보여줄 문장 ===== */
-    addMessage("연결됨."); // 시스템이 있는 것처럼 보이게 연출
+  addMessage("연결됨."); // 시작 메시지
 
-    /* ===== 엔터 키 입력 감지 ===== */
-    input.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {               // 엔터를 눌렀을 때만 실행
-        const text = input.value.trim();     // 입력값 가져오기
-        if (!text) return;                   // 아무것도 없으면 무시
+  // ===== ARG 트리거 키워드 =====
+  const SECRET = "background.log"; 
+  // ↑ 이 단어를 아는 사람만 다음 단계로 감
 
-        addMessage("> " + text);             // 사용자가 친 문장 출력
-        input.value = "";                    // 입력창 비우기
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      const text = input.value.trim();
+      if (!text) return;
 
-        addMessage("응답 없음.");            // 현재는 항상 같은 응답
+      addMessage("> " + text); // 사용자 입력 출력
+      input.value = "";
+
+      // ===== 비밀 키워드 판별 =====
+      if (text === SECRET) {
+        addMessage("접근 권한 확인 중...");
+        addMessage("권한 승인.");
+        addMessage("기록이 열렸습니다.");
+
+        // ARG가 시작됐다는 명확한 신호
+        addMessage("[SYSTEM] 다음 지시를 기다리세요.");
+
+      } else {
+        // 키워드를 모르면 항상 같은 반응
+        addMessage("응답 없음.");
       }
-    });
-  </script>
+    }
+  });
+</script>
+
 
 </body>
 </html>
