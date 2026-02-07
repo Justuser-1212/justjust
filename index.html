@@ -13,11 +13,7 @@
       align-items: center;
       height: 100vh;
     }
-
-    #chat {
-      width: 400px;
-    }
-
+    #chat { width: 400px; }
     #log {
       height: 300px;
       border: 1px solid #00ffcc;
@@ -25,14 +21,12 @@
       overflow-y: auto;
       margin-bottom: 10px;
     }
-
     input {
       width: 100%;
       background: black;
       color: #00ffcc;
       border: 1px solid #00ffcc;
       padding: 8px;
-      font-family: monospace;
     }
   </style>
 </head>
@@ -44,6 +38,8 @@
   </div>
 
   <script>
+    console.log("JS LOADED");
+
     const log = document.getElementById("log");
     const input = document.getElementById("input");
 
@@ -58,4 +54,15 @@
 
     input.addEventListener("keydown", (e) => {
       if (e.key === "Enter") {
-        const text = input.value.
+        const text = input.value.trim();
+        if (!text) return;
+
+        addMessage("> " + text);
+        input.value = "";
+        addMessage("응답 없음.");
+      }
+    });
+  </script>
+
+</body>
+</html>
