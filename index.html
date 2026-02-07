@@ -5,42 +5,58 @@
   <title>ARG Terminal</title>
 
   <style>
-    /* ===== 전체 화면 기본 스타일 ===== */
-    body {
-      background: black;           /* ARG 분위기용 검은 배경 */
-      color: #00ffcc;               /* 터미널 느낌의 글자색 */
-      font-family: monospace;       /* 고정폭 폰트 */
-      display: flex;                /* 가운데 정렬용 */
-      justify-content: center;
-      align-items: center;
-      height: 100vh;                /* 화면 전체 높이 */
-      margin: 0;
-    }
+  /* ===== 전체 배경 설정 ===== */
+  body {
+    margin: 0;
+    height: 100vh;
 
-    /* ===== 채팅 전체 박스 ===== */
-    #chat {
-      width: 400px;
-    }
+    /* 배경 이미지 */
+    background-image: url("background.png"); 
+    /* ↑ 같은 폴더에 있는 이미지 */
 
-    /* ===== 채팅 로그 영역 ===== */
-    #log {
-      height: 300px;                /* 채팅 기록이 쌓이는 공간 */
-      border: 1px solid #00ffcc;
-      padding: 10px;
-      overflow-y: auto;             /* 내용 많아지면 스크롤 */
-      margin-bottom: 10px;
-    }
+    background-size: cover;        /* 화면 꽉 채우기 */
+    background-position: center;   /* 가운데 기준 */
+    background-repeat: no-repeat;  /* 반복 안 함 */
 
-    /* ===== 입력창 ===== */
-    input {
-      width: 100%;
-      background: black;
-      color: #00ffcc;
-      border: 1px solid #00ffcc;
-      padding: 8px;
-      font-family: monospace;
-    }
-  </style>
+    /* 어두운 분위기용 오버레이 효과 */
+    background-color: black;
+    background-blend-mode: multiply;
+
+    /* UI 정렬 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: monospace;
+    color: #00ffcc;
+  }
+
+  /* ===== 채팅 박스 ===== */
+  #chat {
+    width: 400px;
+
+    /* 배경 위에 떠 있는 느낌 */
+    background: rgba(0, 0, 0, 0.8); /* 반투명 */
+    border: 1px solid #00ffcc;
+    padding: 15px;
+  }
+
+  #log {
+    height: 300px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+  }
+
+  input {
+    width: 100%;
+    background: black;
+    color: #00ffcc;
+    border: 1px solid #00ffcc;
+    padding: 8px;
+    font-family: monospace;
+  }
+</style>
+
 </head>
 <body>
 
