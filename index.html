@@ -2,64 +2,87 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>...</title>
+  <title>ARG Terminal</title>
+
   <style>
+    /* ===== 전체 화면 기본 스타일 ===== */
     body {
-      background: black;
-      color: #00ffcc;
-      font-family: monospace;
-      display: flex;
+      background: black;           /* ARG 분위기용 검은 배경 */
+      color: #00ffcc;               /* 터미널 느낌의 글자색 */
+      font-family: monospace;       /* 고정폭 폰트 */
+      display: flex;                /* 가운데 정렬용 */
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      height: 100vh;                /* 화면 전체 높이 */
+      margin: 0;
     }
-    #chat { width: 400px; }
+
+    /* ===== 채팅 전체 박스 ===== */
+    #chat {
+      width: 400px;
+    }
+
+    /* ===== 채팅 로그 영역 ===== */
     #log {
-      height: 300px;
+      height: 300px;                /* 채팅 기록이 쌓이는 공간 */
       border: 1px solid #00ffcc;
       padding: 10px;
-      overflow-y: auto;
+      overflow-y: auto;             /* 내용 많아지면 스크롤 */
       margin-bottom: 10px;
     }
+
+    /* ===== 입력창 ===== */
     input {
       width: 100%;
       background: black;
       color: #00ffcc;
       border: 1px solid #00ffcc;
       padding: 8px;
+      font-family: monospace;
     }
   </style>
 </head>
 <body>
 
+  <!-- 채팅 UI -->
   <div id="chat">
-    <div id="log"></div>
-    <input id="input" placeholder="입력하세요" autocomplete="off">
+    <div id="log"></div>   <!-- 메시지가 추가되는 영역 -->
+    <input
+      id="input"
+      placeholder="입력하세요"
+      autocomplete="off"
+    > <!-- 사용자가 타이핑하는 곳 -->
   </div>
 
   <script>
-    console.log("JS LOADED");
+    /* ===== JS가 로드됐는지 확인용 ===== */
+    console.log("JS LOADED"); // 콘솔에 이게 뜨면 JS 정상 실행
 
-    const log = document.getElementById("log");
-    const input = document.getElementById("input");
+    /* ===== HTML 요소 가져오기 ===== */
+    const log = document.getElementById("log");     // 채팅 기록 영역
+    const input = document.getElementById("input"); // 입력창
 
+    /* ===== 메시지를 화면에 추가하는 함수 ===== */
     function addMessage(text) {
-      const p = document.createElement("p");
-      p.textContent = text;
-      log.appendChild(p);
-      log.scrollTop = log.scrollHeight;
+      const p = document.createElement("p"); // <p> 태그 생성
+      p.textContent = text;                  // 텍스트 넣기
+      log.appendChild(p);                    // log에 추가
+      log.scrollTop = log.scrollHeight;      // 항상 아래로 스크롤
     }
 
-    addMessage("연결됨.");
+    /* ===== 페이지 열리자마자 보여줄 문장 ===== */
+    addMessage("연결됨."); // 시스템이 있는 것처럼 보이게 연출
 
+    /* ===== 엔터 키 입력 감지 ===== */
     input.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        const text = input.value.trim();
-        if (!text) return;
+      if (e.key === "Enter") {               // 엔터를 눌렀을 때만 실행
+        const text = input.value.trim();     // 입력값 가져오기
+        if (!text) return;                   // 아무것도 없으면 무시
 
-        addMessage("> " + text);
-        input.value = "";
-        addMessage("응답 없음.");
+        addMessage("> " + text);             // 사용자가 친 문장 출력
+        input.value = "";                    // 입력창 비우기
+
+        addMessage("응답 없음.");            // 현재는 항상 같은 응답
       }
     });
   </script>
